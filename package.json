@@ -13,8 +13,8 @@
     "start": "node dist/bin/www.js",
     "db": "LOG_LEVEL=debug knex migrate:latest && knex seed:run",
     "build": "rimraf dist && cross-env NODE_ENV=production babel src -d dist -s",
-    "dev": "nodemon src/bin/www.js",
-    "test": "cross-env NODE_ENV=test jest",
+    "dev": "cross-env JWT_SECRET=supersecret nodemon src/bin/www.js",
+    "test": "cross-env JWT_SECRET=supersecret NODE_ENV=test jest",
     "cover": "npm run test -- --coverage",
     "lint": "eslint --fix src && prettier --write \"src/**/*.js\""
   },
@@ -24,7 +24,9 @@
     "awilix-koa": "^3.0.0",
     "axios": "^0.18.0",
     "bristol": "^0.4.0",
+    "crypto": "^1.0.1",
     "fejl": "^1.0.2",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.10",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
@@ -32,6 +34,7 @@
     "koa-respond": "^2.1.0",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.11",
+    "moment-timezone": "^0.5.28",
     "mysql2": "^2.1.0",
     "palin": "^2.2.0",
     "yenv": "^2.1.0"
