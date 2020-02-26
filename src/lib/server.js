@@ -22,6 +22,12 @@ export async function createServer() {
   logger.debug('Creating server...')
   const app = new Koa()
 
+  // Cors Option to expose Date response header in the front
+  const corsOptions = {
+    exposeHeaders: ['Date'],
+    credentials: true
+  }
+
   // Container is configured with our services and whatnot.
   const container = (app.container = configureContainer())
   app
@@ -32,7 +38,7 @@ export async function createServer() {
     // Adds ctx.ok(), ctx.notFound(), etc..
     .use(respond())
     // Handles CORS.
-    .use(cors())
+    .use(cors(corsOptions))
     // Parses request bodies.
     .use(bodyParser())
     // Creates an Awilix scope per request. Check out the awilix-koa
