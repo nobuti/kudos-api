@@ -16,7 +16,7 @@ console: ## Run a mysql console, mostly for debug porposes
 
 dev: ## Run a development environment on port 5000
 	@docker-compose build dev
-	@docker-compose up --remove-orphans
+	@docker-compose up --remove-orphans dev
 	@docker-compose logs -f dev
 
 test: ## Run the current test suite

@@ -27,9 +27,7 @@ services:
       - MYSQL_PASSWORD=kudos
       - DB_HOST=database
     ports:
-      - "5001:5000"
-    expose:
-      - "5000"
+      - "5000:5000"
     depends_on:
       - database
     command: sh -c 'bin/wait-for.sh database:3306 -- yarn db && yarn dev'
