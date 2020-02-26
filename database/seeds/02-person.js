@@ -3,7 +3,6 @@ const alice = {
   name: 'Alice',
   lastName: 'Andersen',
   email: 'alice@wadus.co',
-  status: 'activated',
   company: 1
 }
 
@@ -12,7 +11,6 @@ const buti = {
   name: 'Buti',
   lastName: 'Lon',
   email: 'bob@wadus.co',
-  status: 'activated',
   company: 1
 }
 
@@ -37,7 +35,6 @@ const laurie = {
   name: 'Laura',
   lastName: 'Doe',
   email: 'laura@wadus.co',
-  status: 'activated',
   company: 1
 }
 
@@ -46,7 +43,6 @@ const factorial = {
   name: 'Factorial',
   lastName: 'Team',
   email: 'factorial@wadus.co',
-  status: 'activated',
   company: 2
 }
 
