@@ -2,28 +2,9 @@
 
 ✨ This API uses [this boilerplate](https://github.com/jeffijoe/koa-es7-boilerplate) for writing beautiful `async-await`-based Koa API's using `babel` for **Node v8.0 and above!**. 🚀
 
-## Setting up shop
+## Migrations
 
-Clone this repo and adjust details in `package.json`. Remove the `.git` directory and `git init` to start fresh.
-
-Read on to learn how to actually start being productive.
-
-## What's in the package?
-
-- 🏃‍♀️&nbsp;&nbsp;&nbsp;`npm run` scripts, see next section for details.
-- 🛣 &nbsp;&nbsp;[`awilix-koa`][awilix-koa] for declarative routing.
-- 🗣&nbsp;&nbsp;&nbsp;[`babel`][babel] with `env` presets, `transform-runtime` + `transform-object-rest-spread` plugins and sourcemaps.
-- 🃏&nbsp;&nbsp;&nbsp;[`jest`][jest] for testing with some API testing helpers.
-- 💪&nbsp;&nbsp;&nbsp;[`koa-bodyparser`][koa-bodyparser] for parsing request bodies.
-- ✅ &nbsp;&nbsp;[`eslint`][eslint] with [standard][standard], works with ES7 thanks to `babel-eslint`.
-- 👀 &nbsp;&nbsp;[`prettier`][prettier] code formatting, configured to work with `eslint` out of the box.
-- 🐶 &nbsp;&nbsp;[`husky`][husky] + [`lint-staged`][lint-staged] to lint and format files when committing.
-- ❌ &nbsp;&nbsp;[`@koa/cors`][cors] CORS middleware for cross-domain requests.
-- 🕵️‍♀️&nbsp;&nbsp;&nbsp;[`nodemon`][nodemon] for development to auto-restart when your files change.
-- 🛠 &nbsp;&nbsp;[`koa-respond`][respond] for helper functions on the context.
-- 📄 &nbsp;&nbsp;&nbsp;[`yenv`][yenv] for environment variable management.
-- 💉 &nbsp;&nbsp;&nbsp;[`awilix`][awilix] for dependency injection / IoC.
-- ⚠️ &nbsp;&nbsp;&nbsp;[`fejl`][fejl] for assertions and errors.
+We use [knex](https://knexjs.org) to manage migrations. Knex is an SQL query builder for Node.js.
 
 ## `npm run` scripts
 
@@ -41,32 +22,34 @@ There are a few defined run scripts, here's a list of them with a description of
 **For npm:**
 
 ```bash
-# Note the `--` before the actual arguments.
 npm run test -- --debug
 ```
 
 **For yarn:**
 
 ```bash
-# Yarn does not need the `--` before the actual arguments.
 yarn test --debug
 ```
 
-## `docker-compose up` scripts
+## `make` scripts
 
 **For running dev:**
 
 ```bash
-# Note: use --build only when you want to build. Usually when you change packages.json
-docker-compose up --build
+make dev
 ```
 
 **For running test:**
 
 ```bash
-docker-compose -f docker-compose.test.yml up
+make test
 ```
 
+**Tip**: If you get an error 126 running Docker, try:
+
+```
+sudo chmod +x bin/wait-for.sh
+```
 
 ## Directory structure
 
@@ -129,7 +112,7 @@ Middleware is located in the `middleware` folder and is _not_ automatically load
 
 # Author
 
-- Jeff Hansen - [@Jeffijoe](https://twitter.com/Jeffijoe)
+- Buti - [@nobuti](https://github.com/nobuti)
 
 # License
 
@@ -137,20 +120,3 @@ MIT.
 
 [api-helper]: /src/__tests__/api-helper.js
 [close-event]: /src/lib/server.js#L58
-[standard]: http://standardjs.com/
-[koa-router]: https://github.com/alexmingoia/koa-router
-[babel]: https://github.com/babel/babel
-[jest]: https://github.com/facebook/jest
-[koa-bodyparser]: https://github.com/koajs/bodyparser
-[eslint]: https://github.com/eslint/eslint
-[prettier]: https://github.com/prettier/prettier
-[husky]: https://github.com/typicode/husky
-[lint-staged]: https://github.com/okonet/lint-staged
-[cors]: https://github.com/koajs/cors
-[nodemon]: https://github.com/remy/nodemon
-[respond]: https://github.com/jeffijoe/koa-respond
-[yenv]: https://github.com/jeffijoe/yenv
-[awilix]: https://github.com/jeffijoe/awilix
-[awilix-koa]: https://github.com/jeffijoe/awilix-koa
-[smid]: https://github.com/jeffijoe/smid
-[fejl]: https://github.com/jeffijoe/fejl
