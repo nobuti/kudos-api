@@ -74,7 +74,7 @@ export default class AuthService {
     }
   }
 
-  async validateTokens(ctx, params) {
+  async validateTokens(params, ctx) {
     assertParams(params)
 
     const { tokenDevice, tokenPublic } = params

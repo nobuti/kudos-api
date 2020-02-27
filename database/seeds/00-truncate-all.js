@@ -1,4 +1,4 @@
-const TABLES1 = ['interaction', 'kudos']
+const TABLES1 = ['interaction', 'kudos', 'interaction', 'login']
 const TABLES2 = ['person', 'company']
 
 exports.seed = async knex => {
