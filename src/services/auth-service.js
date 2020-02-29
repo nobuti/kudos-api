@@ -86,7 +86,7 @@ export default class AuthService {
       expired: false
     })
 
-    const login = [].concat(logins).shift()
+    const [login] = logins
     BadRequest.assert(login, 'Auth tokens are expired or not found')
 
     // test if login is in the time window

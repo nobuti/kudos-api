@@ -56,7 +56,6 @@ const storeTemplate = (table, extend) => {
       if (orderBy) result = result.orderBy(orderBy.field, orderBy.direction)
       const [err, data] = await to(result)
       DatabaseError.assert(err)
-
       return data
     },
 

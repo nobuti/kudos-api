@@ -1,4 +1,3 @@
-import { throws } from 'smid'
 import moment from 'moment-timezone'
 
 import AuthService, { getMagicLink } from '../auth-service'
@@ -44,44 +43,50 @@ describe('AuthService', () => {
   describe('token', () => {
     it('should throw an error if credential is missing', async () => {
       const authService = setup()
-      expect((await throws(authService.token())).message).toMatch(
-        /No auth params given/i
-      )
-      expect(
-        (await throws(
-          authService.token({
-            nonSense: 'wadus'
-          })
-        )).message
-      ).toMatch(/Auth credential is required/i)
+
+      try {
+        await authService.token()
+      } catch (e) {
+        expect(e.message).toMatch(/No auth params given/i)
+      }
+
+      try {
+        await authService.token({
+          nonSense: 'wadus'
+        })
+      } catch (e) {
+        expect(e.message).toMatch(/Auth credential is required/i)
+      }
     })
 
     it('should throw an error if credential is not email', async () => {
       const authService = setup()
-      expect(
-        (await throws(
-          authService.token(
-            {
-              credential: 'wadus'
-            },
-            mockedContext
-          )
-        )).message
-      ).toMatch(/User not found/i)
+
+      try {
+        await authService.token(
+          {
+            credential: 'wadus'
+          },
+          mockedContext
+        )
+      } catch (e) {
+        expect(e.message).toMatch(/User not found/i)
+      }
     })
 
     it('should throw an error if credential does not match to a user', async () => {
       const authService = setup()
-      expect(
-        (await throws(
-          authService.token(
-            {
-              credential: 'wadus@test.com'
-            },
-            mockedContext
-          )
-        )).message
-      ).toMatch(/User not found/i)
+
+      try {
+        await authService.token(
+          {
+            credential: 'wadus@test.com'
+          },
+          mockedContext
+        )
+      } catch (e) {
+        expect(e.message).toMatch(/User not found/i)
+      }
     })
 
     it('should create tokens properly with existing email credential', async () => {
@@ -106,37 +111,44 @@ describe('AuthService', () => {
   describe('token validation', () => {
     it('should throw an error if tokens are missing', async () => {
       const authService = setup()
-      expect(
-        (await throws(authService.validateTokens(null, mockedContext))).message
-      ).toMatch(/No auth params given/i)
 
-      expect(
-        (await throws(
-          authService.validateTokens(
-            {
-              tokenDevice: 'wadus'
-            },
-            mockedContext
-          )
-        )).message
-      ).toMatch(/Auth tokens are required/i)
+      try {
+        await authService.validateTokens(null, mockedContext)
+      } catch (e) {
+        expect(e.message).toMatch(/No auth params given/i)
+      }
+    })
+
+    it('should throw an error if any token is missing', async () => {
+      const authService = setup()
+
+      try {
+        await authService.validateTokens(
+          {
+            tokenDevice: 'wadus'
+          },
+          mockedContext
+        )
+      } catch (e) {
+        expect(e.message).toMatch(/Auth tokens are required/i)
+      }
     })
 
     it('should throw an error if no login matches', async () => {
       const authService = setup()
       authService.loginStore.search.mockImplementation(() => [])
 
-      expect(
-        (await throws(
-          authService.validateTokens(
-            {
-              tokenDevice: 'wadus',
-              tokenPublic: 'wadus'
-            },
-            mockedContext
-          )
-        )).message
-      ).toMatch(/Auth tokens are expired or not found/i)
+      try {
+        await authService.validateTokens(
+          {
+            tokenDevice: 'wadus',
+            tokenPublic: 'wadus'
+          },
+          mockedContext
+        )
+      } catch (e) {
+        expect(e.message).toMatch(/Auth tokens are expired/i)
+      }
     })
 
     it('should throw an error if tokens are expired', async () => {
@@ -166,18 +178,6 @@ describe('AuthService', () => {
       } catch (e) {
         expect(e.message).toMatch(/Auth tokens are expired/i)
       }
-
-      // expect(
-      //   (await throws(
-      //     authService.validateTokens(
-      //       {
-      //         tokenDevice: 'wadus',
-      //         tokenPublic: 'wadus'
-      //       },
-      //       mockedContext
-      //     )
-      //   )).message
-      // ).toMatch(/Auth tokens are expired/i)
     })
 
     it('should return person properly', async () => {

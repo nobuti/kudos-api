@@ -59,14 +59,27 @@ describe('Auth API', () => {
 
   describe(`${API}/auth/validate`, () => {
     it('should validate token properly', async () => {
-      const api = await apiHelper()
-      const tokens = await api.getTokens(people[0])
+      const user = {
+        email: 'test@wadus.co',
+        name: 'Tester',
+        lastName: 'Tester',
+        company: 1
+      }
 
-      const res = await api.client.post(`${API}/auth/validate`, { ...tokens })
+      const { client, getTokens, entities } = await apiHelper({
+        authentication: true,
+        user: people[0]
+      })
+      const { personStore } = entities
+      const person = await personStore.create(user)
+      const tokens = await getTokens(person)
 
+      const res = await client.post(`${API}/auth/validate`, tokens)
       let { data, status } = res
       expect(status).toBe(200)
       expect(data).toBeDefined()
+
+      await personStore.remove(person.id)
     })
 
     it('should raise an error if tokens are not provided', async () => {
