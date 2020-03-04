@@ -1,6 +1,6 @@
 import { NotFound, BadRequest } from 'fejl'
 
-import { pick } from '../utils'
+import { pick } from 'lodash'
 
 const assertId = BadRequest.makeAssert('No id given')
 
@@ -35,7 +35,7 @@ export default class Service {
     assertId(id)
     BadRequest.assert(data, `No ${this.entity} payload given`)
     const picked = pick(data, this.fields)
-    await this.get(id).then(entity =>
+    await this.find(id).then(entity =>
       NotFound.assert(
         entity && entity.status !== 'deleted',
         `${this.entity} with id "${id}" not found`
@@ -45,7 +45,7 @@ export default class Service {
   }
 
   async remove(id) {
-    await this.get(id).then(entity =>
+    await this.find(id).then(entity =>
       NotFound.assert(
         entity && entity.status !== 'deleted',
         `${this.entity} with id "${id}" not found`

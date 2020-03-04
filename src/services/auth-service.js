@@ -2,9 +2,9 @@ import { BadRequest, NotFound } from 'fejl'
 import crypto from 'crypto'
 import moment from 'moment-timezone'
 import jwt from 'jsonwebtoken'
+import { pick } from 'lodash'
 
 import config from '../config'
-import { pick } from '../utils'
 
 const secret = process.env.JWT_SECRET
 const { TOKEN_LENGTH, TOKEN_EXPIRATION, PERSON_STATUS } = config

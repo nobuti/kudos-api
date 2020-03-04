@@ -10,7 +10,6 @@ const isAuthenticated = async (ctx, next) => {
   try {
     const decoded = jwt.verify(token, secret)
     SessionError.assert(decoded && decoded.user)
-
     ctx.request.jwt = decoded
   } catch (err) {
     SessionError.assert(!err)

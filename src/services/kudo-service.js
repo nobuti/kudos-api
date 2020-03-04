@@ -1,8 +1,8 @@
 import { BadRequest } from 'fejl'
+import { pick } from 'lodash'
 
 import Service from './service-template'
 import SessionError from '../errors/session-error'
-import { pick } from '../utils'
 
 const assertByUser = BadRequest.makeAssert('No user to filter by')
 
@@ -12,7 +12,7 @@ export default class KudoService extends Service {
     this.personService = personService
     this.interactionService = interactionService
     this.entity = 'kudos'
-    this.fields = ['id', 'owner', 'message', 'favorited', 'people']
+    this.fields = ['id', 'owner', 'message', 'people']
   }
 
   async get(ctx) {

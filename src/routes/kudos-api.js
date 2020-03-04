@@ -7,6 +7,8 @@ const { API } = config
 
 const api = kudoService => ({
   getAll: async ctx => ctx.ok(await kudoService.get(ctx)),
+  getAllOfUser: async ctx =>
+    ctx.ok(await kudoService.getByPerson(ctx.params.user, ctx)),
   getMine: async ctx => {
     const { user } = ctx.request.jwt
     return ctx.ok(await kudoService.getByPerson(user, ctx))
@@ -19,4 +21,5 @@ export default createController(api)
   .before(isAuthenticated)
   .get('/', 'getAll')
   .get('/me', 'getMine')
+  .get('/person/:user', 'getAllOfUser')
   .post('/', 'create')
