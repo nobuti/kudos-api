@@ -81,12 +81,9 @@ export async function apiHelper(auth = { authentication: false, user: null }) {
     caught: catchAndLog, // Useful for logging failing requests
     client,
     entities,
-    // Person API:
-    me: () => client.get(`${API}/person/me`).then(assertStatus(200)),
-    findPerson: () => client.get(`${API}/person`).then(assertStatus(200)),
-    stop: () => server.close(),
     getTokens: user => getTokens(baseURL, user),
-    authenticate: user => authenticate(baseURL, user)
+    authenticate: user => authenticate(baseURL, user),
+    stop: () => server.close()
   }
 }
 
