@@ -2,9 +2,23 @@
 
 ✨ This API uses [this boilerplate](https://github.com/jeffijoe/koa-es7-boilerplate) for writing beautiful `async-await`-based Koa API's using `babel` for **Node v8.0 and above!**. 🚀
 
+Kudos is a noun that means “praise, honor, or acclaim.” Kudo is the singular version of kudos, but kudos is also singular. Kudos comes from the Greek word kydos, which means praise or renown. Kudos are usually offered in response to an exceptional achievement. The Kudos API is an online employee experience and culture platform that leverages the power of employee recognition.
+
+## Auth
+
+This API uses a systema based on passwordless authentication and JWT. Passwordless authentication is becoming an increasingly relevant option for login. The system works generating two tokens, one public and one private. When users try to log in, the private token is saved in their devices, and the public token travels as part as a __magic link__. When users click on that __magic link__, both token are validated in the api.
+
+## TODO
+
+- Integration with an email provider
+- More social interaction like favoriting kudos, rankings, etc...
+- Roles
+- Administration endpoints to create companies, people...
+- Continuous integration and deployment system
+
 ## Migrations
 
-We use [knex](https://knexjs.org) to manage migrations. Knex is an SQL query builder for Node.js.
+Kudos uses [knex](https://knexjs.org) to manage migrations. Knex is an SQL query builder for Node.js.
 
 ## `npm run` scripts
 
